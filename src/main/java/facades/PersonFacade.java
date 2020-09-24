@@ -103,7 +103,7 @@ public class PersonFacade implements IPersonFacade {
        try {
            Person person = em.find(Person.class, id);
            if (person == null) {
-                throw new PersonNotFoundException(String.format("Person with id: (%d) not found. Din tosse!! Ja, jeg mener det!!!", id));
+                throw new PersonNotFoundException(String.format("Person with id: (%d) not found.", id));
             } else {
                 return new PersonDTO(person);
            }
