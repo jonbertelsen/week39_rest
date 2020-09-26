@@ -100,6 +100,8 @@ public class PersonFacade implements IPersonFacade {
     @Override
     public PersonDTO getPerson(long id) throws PersonNotFoundException {
        EntityManager em = getEntityManager();
+       
+           
        try {
            Person person = em.find(Person.class, id);
            if (person == null) {
