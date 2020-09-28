@@ -32,6 +32,7 @@ public class Person implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date created;
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastEdited;
     
@@ -52,6 +53,13 @@ public class Person implements Serializable {
             this.address = address;
             address.addPerson(this);
         } else {
+            this.address = null;
+        }
+    }
+    
+    public void removeAddress(Address address){
+        if (address != null){
+            address.getPerson().remove(this);
             this.address = null;
         }
     }

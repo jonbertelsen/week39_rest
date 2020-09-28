@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -142,10 +143,22 @@ public class PersonFacade implements IPersonFacade {
                     person.setLastName(p.getlName());
                     person.setPhone(p.getPhone());
                     person.setLastEdited();
-                    person.getAddress().setStreet(p.getStreet());
-                    person.getAddress().setZip(p.getZip());
-                    person.getAddress().setCity(p.getCity());
-                }
+                    
+                    TypedQuery personAtSameAddressQuery = em.createQuery("SELECT p FROM Person p WHERE p.address.id = :a_id AND p.id <> :p_id", Address.class);
+                    personAtSameAddressQuery.setParameter("a_id", person.getAddress().getId());
+                    personAtSameAddressQuery.setParameter("p_id", person.getId());
+                    List<Person> personsAtSameAddress = personAtSameAddressQuery.getResultList();
+                    
+                    if (personsAtSameAddress.isEmpty()){
+                        person.getAddress().setStreet(p.getStreet());
+                        person.getAddress().setZip(p.getZip());
+                        person.getAddress().setCity(p.getCity());
+                    } else {
+                        Address newAddress = new Address(p.getStreet(), p.getZip(),p.getCity());
+                        person.removeAddress(person.getAddress());
+                        person.setAddress(newAddress);
+                    }
+                    }
                 em.getTransaction().commit();
                 return new PersonDTO(person);
         } finally {  

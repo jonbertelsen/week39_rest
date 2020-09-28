@@ -7,6 +7,11 @@
         <!--    <class>entities.RenameMe</class>-->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
+            <property name="eclipselink.logging.level" value="FINE"/>	
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true" /> 
+            
+            
             <!-- DO NOT remove the line below. It's not set by the  entityUtils.EMF_Creator -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.canonicalmodel.subpackage" value="xx345y657"/>
@@ -29,6 +34,8 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         
         <properties>
+
+
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.canonicalmodel.subpackage" value="ghy636765"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/startcode_test"/>
