@@ -19,12 +19,12 @@ import javax.ws.rs.ext.Provider;
  * @author jobe
  */
 @Provider
-public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotFoundException> 
+public class PersonNotFoundMapper implements ExceptionMapper<PersonNotFound> 
 {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();   
     @Override
-    public Response toResponse(PersonNotFoundException ex) {
-       Logger.getLogger(PersonNotFoundExceptionMapper.class.getName())
+    public Response toResponse(PersonNotFound ex) {
+       Logger.getLogger(PersonNotFoundMapper.class.getName())
            .log(Level.SEVERE, null, ex);
        ExceptionDTO err = new ExceptionDTO(404,ex.getMessage());
        return Response

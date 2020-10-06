@@ -5,7 +5,7 @@ import dtomappers.PersonsDTO;
 import entities.Address;
 import utils.EMF_Creator;
 import entities.Person;
-import java.util.Set;
+import java.util.HashSet;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -100,23 +99,38 @@ public class PersonFacadeTest {
     }
 
     @Test
-    public void testAddPerson() throws Exception {
-        System.out.println("addPerson");
+    public void testAddPersonFirstNameMissing() throws Exception {
+        PersonDTO result = facade.addPerson(createTestPersonDTO());
+        PersonDTO expResult = createTestPersonDTO();
+        assertEquals(expResult.getfName(), result.getfName());
+    }
+    
+    @Test
+    public void testAddPersonLastNameMissing() throws Exception {
+        PersonDTO result = facade.addPerson(createTestPersonDTO());
+        PersonDTO expResult = createTestPersonDTO();
+        assertEquals(expResult.getlName(), result.getlName());
+    }
+    
+    @Test
+    public void testAddPersonPhoneMissing() throws Exception {
+        PersonDTO result = facade.addPerson(createTestPersonDTO());
+        PersonDTO expResult = createTestPersonDTO();
+        assertEquals(expResult.getPhone(), result.getPhone());
+    }
+    
+    private static PersonDTO createTestPersonDTO(){
         String fName = "Aria";
         String lName = "Stark";
         String phone = "234234";
         String street = "The Hollow";
         String zip = "2332";
         String city = "Winterfell";
-        EntityManagerFactory _emf = null;
-        PersonFacade instance = PersonFacade.getFacadeExample(_emf);
-        PersonDTO result = instance.addPerson(fName, lName, phone, street, zip, city);
-        PersonDTO expResult = new PersonDTO(fName, lName, phone, street, zip, city);
-        expResult.setId(expResult.getId());
-        assertEquals(expResult.getfName(), result.getfName());
-        assertEquals(expResult.getlName(), result.getlName());
-        assertEquals(expResult.getPhone(), result.getPhone());
+        PersonDTO p = new PersonDTO(fName, lName, phone, street, zip, city);
+        return p;
     }
+    
+    
 
     @Test
     public void testDeletePerson() throws Exception {

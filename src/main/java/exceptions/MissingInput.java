@@ -9,8 +9,8 @@ package exceptions;
  *
  * @author jobe
  */
-public class PersonNotFoundException extends Exception {
-    public PersonNotFoundException(String message) {
+public class MissingInput extends Exception {
+    public MissingInput (String message) {
         super(message);
     }
 }

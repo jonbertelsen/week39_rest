@@ -82,11 +82,9 @@ public class Address implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
-
-    public List<Person> getPerson() {
-        return persons;
-    }
-
     
+    public void removePerson(Person p){
+        persons.remove(p);
+    }
     
 }

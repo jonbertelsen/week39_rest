@@ -59,7 +59,7 @@ public class Person implements Serializable {
     
     public void removeAddress(Address address){
         if (address != null){
-            address.getPerson().remove(this);
+            address.removePerson(this);
             this.address = null;
         }
     }

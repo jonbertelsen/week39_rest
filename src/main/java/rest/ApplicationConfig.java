@@ -21,8 +21,8 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(exceptions.GenericExceptionMapper.class);
-        resources.add(exceptions.MissingInputExceptionMapper.class);
-        resources.add(exceptions.PersonNotFoundExceptionMapper.class);
+        resources.add(exceptions.MissingInputMapper.class);
+        resources.add(exceptions.PersonNotFoundMapper.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(rest.PersonResource.class);
     }
